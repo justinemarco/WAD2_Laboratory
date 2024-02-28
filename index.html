@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+
+    <div id="content"></div>
+    
+    <script>
+
+// 1.) Write a function called isOdd that receives 1 parameter
+    function isOdd (number) {
+        return new Promise((resolve, reject) => {
+            if (number % 2 !== 0) {
+                resolve(true);
+            } 
+            else {
+                reject(false);
+            }
+        });
+    }
+
+    let numbers = [1, 2, 3, 4, 5];
+
+    for (let i = 0; i < numbers.length; i++) {
+        isOdd(numbers[i])
+
+        .then(result => {
+            if (result) {
+            console.log(`${numbers[i]} isOdd`);
+            }
+        },
+        
+        reject=> {}
+        )
+    }
+
+// 2.) Write an asynchronous function - resolve
+    function getRandomCharacter () {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                let randomIndex = Math.floor(Math.random() * characters.length);
+                resolve(characters[randomIndex]);
+            }, 500);
+        });
+    }
+
+    getRandomCharacter()
+        .then(character => {
+            console.log("Result: ", character);
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+// 3.) Write an asynchronous function  - reject
+    function getData() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                let randomValue = Math.floor(Math.random() * 100);
+                reject(randomValue);
+            }, 500);
+        });
+    }
+
+    getData()
+        .then(character => {
+            console.log("Result: ", character);
+        })
+        .catch(error => {
+            console.log("Rejected: ", error);
+        });
+
+// 4.) Write an asynchronous function  - reject + resolve
+        function rejectResolve() {
+            return new Promise((resolve, reject) => {
+                let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                let randomIndex = Math.floor(Math.random() * characters.length);
+
+                setTimeout(() => {
+                    for (let i=0; i < 2; i++){
+                        if (i === 1){
+                            console.log("Resolved: ", characters[randomIndex]);
+                        }
+                        else {
+                            console.log("Rejected: An error occured");
+                        }
+                    }
+                }, 500);
+            });
+        }
+
+        rejectResolve();
+            
+   </script>
+
+</body>
+</html>
